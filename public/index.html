@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Patrio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Overlay de Login -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-card">
+            <h2>🇨🇱 Bingo Patrio 🇨🇱</h2>
+            <p>Ingresa tu nombre para jugar:</p>
+            <form id="login-form">
+                <input type="text" id="username-input" placeholder="Tu nombre o apodo" required autocomplete="off">
+                <button type="submit" class="btn btn-primary">Entrar al Juego</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Encabezado -->
+        <header>
+            <h1>🇨🇱 BINGO PATRIO 🇨🇱</h1>
+            <div class="user-info">Jugador: <strong id="player-display-name">---</strong></div>
+            <div class="status-container">
+                <span id="status-badge">Esperando...</span>
+                <button id="admin-game-mode-btn" class="btn-small">⚙️ Admin</button>
+            </div>
+            <div class="mode-indicator">Modo: <strong id="mode-title">Cartón Lleno</strong></div>
+        </header>
+
+        <!-- Tablero de Bolita e Historial -->
+        <section class="game-board">
+            <h2>Última Bolita</h2>
+            <div id="current-ball" class="ball-large">--</div>
+            <div class="history-container">
+                <h3>Últimas 5 bolitas:</h3>
+                <div id="ball-history" class="history-list"></div>
+            </div>
+        </section>
+
+        <!-- Cartón de Bingo con Marco RGB y Cabecera B I N G O -->
+        <section class="card-section">
+            <h2>Tu Cartón</h2>
+            
+            <!-- Cabecera de letras B I N G O -->
+            <div class="bingo-header">
+                <div>B</div>
+                <div>I</div>
+                <div>N</div>
+                <div>G</div>
+                <div>O</div>
+            </div>
+
+            <!-- Grilla de 25 celdas -->
+            <div id="bingo-card" class="bingo-card"></div>
+        </section>
+
+        <!-- Botón Reclamar Bingo -->
+        <button id="lota-btn" class="btn btn-primary">¡BINGO / LOTA!</button>
+    </div>
+
+    <!-- Modal Admin / Cambiar Modo -->
+    <div id="mode-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Panel de Administración</h2>
+            <div id="admin-login-sec">
+                <p>Ingresa la clave de administrador:</p>
+                <input type="text" id="admin-user" placeholder="Usuario" class="admin-input">
+                <input type="password" id="admin-pass" placeholder="Contraseña" class="admin-input">
+                <button id="admin-login-btn" class="btn btn-primary">Ingresar</button>
+            </div>
+
+            <div id="admin-options-sec" class="hidden">
+                <button id="start-bingo-btn" class="btn btn-start">▶️ INICIAR NUEVO BINGO</button>
+                <button id="pause-bingo-btn" class="btn btn-pause">⏸️ PAUSAR BINGO</button>
+                <hr class="separator">
+                <p class="section-subtitle">Seleccionar Patrón de Juego:</p>
+                <div class="mode-grid">
+                    <button class="btn mode-select-btn" data-mode="full">Cartón Lleno</button>
+                    <button class="btn mode-select-btn" data-mode="line">Línea</button>
+                    <button class="btn mode-select-btn" data-mode="cross">Cruz</button>
+                    <button class="btn mode-select-btn" data-mode="heart">Corazón</button>
+                    <button class="btn mode-select-btn" data-mode="airplane">Avión</button>
+                    <button class="btn mode-select-btn" data-mode="champagne">Copa</button>
+                    <button class="btn mode-select-btn" data-mode="turtle">Tortuga</button>
+                    <button class="btn mode-select-btn" data-mode="letter_l">Letra L</button>
+                    <button class="btn mode-select-btn" data-mode="letter_t">Letra T</button>
+                    <button class="btn mode-select-btn" data-mode="letter_z">Letra Z</button>
+                    <button class="btn mode-select-btn" data-mode="ladder">Escalera</button>
+                    <button class="btn mode-select-btn" data-mode="sputnik">Sputnik</button>
+                    <button class="btn mode-select-btn" data-mode="triple_bingo">Triple Bingo</button>
+                </div>
+            </div>
+
+            <button id="close-mode-modal-btn" class="btn btn-secondary">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal Ganador -->
+    <div id="winner-modal" class="modal hidden">
+        <div class="modal-content winner-box">
+            <h2>🎉 ¡TENEMOS GANADOR! 🎉</h2>
+            <p id="winner-message"></p>
+            <button id="close-modal-btn" class="btn btn-primary">Aceptar</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
